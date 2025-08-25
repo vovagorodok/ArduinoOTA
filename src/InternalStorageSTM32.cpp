@@ -82,7 +82,7 @@ int InternalStorageSTM32Class::open(int length) {
     && HAL_FLASHEx_Erase(&EraseInitStruct, &pageError) == HAL_OK);
 }
 
-size_t InternalStorageSTM32Class::write(uint8_t b) {
+bool InternalStorageSTM32Class::write(uint8_t b) {
 
   addressData.u8[writeIndex] = b;
   writeIndex++;
@@ -91,10 +91,10 @@ size_t InternalStorageSTM32Class::write(uint8_t b) {
     writeIndex = 0;
 
     if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, flashWriteAddress, addressData.u32) != HAL_OK)
-      return 0;
+      return false;
     flashWriteAddress += 4;
   }
-  return 1;
+  return true;
 }
 
 void InternalStorageSTM32Class::close() {

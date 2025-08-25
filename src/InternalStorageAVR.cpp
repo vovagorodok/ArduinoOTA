@@ -37,7 +37,7 @@ int InternalStorageAVRClass::open(int length) {
   return 1;
 }
 
-size_t InternalStorageAVRClass::write(uint8_t b) {
+bool InternalStorageAVRClass::write(uint8_t b) {
   if (pageIndex == 0) {
     optiboot_page_erase(pageAddress);
   }
@@ -51,7 +51,7 @@ size_t InternalStorageAVRClass::write(uint8_t b) {
     pageIndex = 0;
     pageAddress += SPM_PAGESIZE;
   }
-  return 1;
+  return true;
 }
 
 void InternalStorageAVRClass::close() {

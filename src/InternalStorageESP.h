@@ -30,7 +30,8 @@ public:
     return open(length, 0);
   }
   int open(int length, uint8_t command) override;
-  size_t write(uint8_t) override;
+  bool write(uint8_t) override;
+  bool write(uint8_t* buf, size_t size) override;
   void close() override;
   void clear() override;
   void apply() override;

@@ -300,9 +300,7 @@ void WiFiOTAClass::pollServer(Client& client)
       while (client.available()) {
         int l = client.read(buff, sizeof(buff));
         if (l > 0) { // some libraries return -1 if no data are available
-          for (int i = 0; i < l; i++) {
-            _storage->write(buff[i]);
-          }
+          _storage->write(buff, l);
           read += l;
         }
       }

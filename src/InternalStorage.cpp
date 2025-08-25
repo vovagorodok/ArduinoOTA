@@ -164,7 +164,7 @@ int InternalStorageClass::open(int length)
   return 1;
 }
 
-size_t InternalStorageClass::write(uint8_t b)
+bool InternalStorageClass::write(uint8_t b)
 {
   _addressData.u8[_writeIndex] = b;
   _writeIndex++;
@@ -186,7 +186,7 @@ size_t InternalStorageClass::write(uint8_t b)
     waitForReady();
   }
 
-  return 1;
+  return true;
 }
 
 void InternalStorageClass::close()

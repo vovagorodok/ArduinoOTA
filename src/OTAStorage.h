@@ -36,7 +36,13 @@ public:
     (void) command;
     return open(length);
   }
-  virtual size_t write(uint8_t) = 0;
+  virtual bool write(uint8_t) = 0;
+  virtual bool write(uint8_t* buf, size_t size) {
+    for (size_t i = 0; i < size; i++)
+      if (!write(buf[i]))
+        return false;
+    return true;
+  }
   virtual void close() = 0;
   virtual void clear() = 0;
   virtual void apply() = 0;
@@ -50,7 +56,6 @@ protected:
   const uint32_t PAGE_SIZE;
   const uint32_t MAX_FLASH;
   uint32_t bootloaderSize;
-
 };
 
 class ExternalOTAStorage : public OTAStorage {

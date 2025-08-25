@@ -54,12 +54,12 @@ int InternalStorageRP2Class::open(int length) {
   return 1;
 }
 
-size_t InternalStorageRP2Class::write(uint8_t b) {
+bool InternalStorageRP2Class::write(uint8_t b) {
 
   if (pageBuffer == nullptr) {
     pageBuffer = new uint8_t[PAGE_SIZE];
     if (pageBuffer == nullptr)
-      return 0;
+      return false;
   }
 
   pageBuffer[pageBufferIndex++] = b;
@@ -74,7 +74,7 @@ size_t InternalStorageRP2Class::write(uint8_t b) {
     flashWriteIndex += PAGE_SIZE;
   }
 
-  return 1;
+  return true;
 }
 
 void InternalStorageRP2Class::close() {

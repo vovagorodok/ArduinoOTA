@@ -32,7 +32,7 @@ public:
   InternalStorageClass();
 
   int open(int length) override;
-  size_t write(uint8_t) override;
+  bool write(uint8_t) override;
   void close() override;
   void clear() override;
   void apply() override;

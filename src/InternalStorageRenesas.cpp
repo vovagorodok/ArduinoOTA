@@ -107,7 +107,7 @@ int InternalStorageRenesasClass::open(int length) {
   return (rv == FSP_SUCCESS);
 }
 
-size_t InternalStorageRenesasClass::write(uint8_t b) {
+bool InternalStorageRenesasClass::write(uint8_t b) {
 
   buffer[writeIndex] = b;
   writeIndex++;
@@ -119,10 +119,10 @@ size_t InternalStorageRenesasClass::write(uint8_t b) {
     fsp_err_t rv = r_flash_lp_cf_write(&flashCtrl, (uint32_t) &buffer, flashWriteAddress, FLASH_WRITE_SIZE);
     __enable_irq();
     if (rv != FSP_SUCCESS)
-      return 0;
+      return false;
     flashWriteAddress += FLASH_WRITE_SIZE;
   }
-  return 1;
+  return true;
 }
 
 void InternalStorageRenesasClass::close() {

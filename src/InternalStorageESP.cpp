@@ -39,9 +39,14 @@ int InternalStorageESPClass::open(int length, uint8_t command)
   return Update.begin(length, command == 0 ? U_FLASH : U_SPIFFS);
 }
 
-size_t InternalStorageESPClass::write(uint8_t b)
+bool InternalStorageESPClass::write(uint8_t b)
 {
   return Update.write(&b, 1);
+}
+
+bool InternalStorageESPClass::write(uint8_t* buf, size_t size)
+{
+  return Update.write(buf, size);
 }
 
 void InternalStorageESPClass::close()
