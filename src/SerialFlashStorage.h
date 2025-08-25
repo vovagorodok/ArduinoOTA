@@ -29,7 +29,7 @@
 class SerialFlashStorageClass : public ExternalOTAStorage {
 public:
 
-  virtual int open(int length) {
+  int open(int length) override {
     if (!SerialFlash.begin(SERIAL_FLASH_CS)) {
       return 0;
     }
@@ -51,17 +51,17 @@ public:
     return 1;
   }
 
-  virtual size_t write(uint8_t b) {
+  size_t write(uint8_t b) override {
     while (!SerialFlash.ready()) {}
     int ret = _file.write(&b, 1);
     return ret;
   }
 
-  virtual void close() {
+  void close() override {
     _file.close();
   }
 
-  virtual void clear() {
+  void clear() override {
     SerialFlash.remove(updateFileName);
   }
 

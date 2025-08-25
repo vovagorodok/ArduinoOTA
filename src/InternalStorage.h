@@ -31,12 +31,12 @@ public:
 
   InternalStorageClass();
 
-  virtual int open(int length);
-  virtual size_t write(uint8_t);
-  virtual void close();
-  virtual void clear();
-  virtual void apply();
-  virtual long maxSize();
+  int open(int length) override;
+  size_t write(uint8_t) override;
+  void close() override;
+  void clear() override;
+  void apply() override;
+  long maxSize() override;
 
   void debugPrint();
 

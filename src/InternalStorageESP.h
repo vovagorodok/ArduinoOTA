@@ -26,15 +26,15 @@ public:
 
   InternalStorageESPClass();
 
-  virtual int open(int length) {
+  int open(int length) override {
     return open(length, 0);
   }
-  virtual int open(int length, uint8_t command);
-  virtual size_t write(uint8_t);
-  virtual void close();
-  virtual void clear();
-  virtual void apply();
-  virtual long maxSize();
+  int open(int length, uint8_t command) override;
+  size_t write(uint8_t) override;
+  void close() override;
+  void clear() override;
+  void apply() override;
+  long maxSize() override;
 
 private:
 };

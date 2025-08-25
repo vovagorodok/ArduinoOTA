@@ -30,21 +30,21 @@
 class SDStorageClass : public ExternalOTAStorage {
 public:
 
-  virtual int open(int length) {
+  int open(int length) override {
     _file = SD.open(updateFileName, O_CREAT | O_WRITE);
     if (!_file)
       return 0;
     return 1;
   }
 
-  virtual size_t write(uint8_t b) {
+  size_t write(uint8_t b) override {
     return _file.write(b);
   }
-  virtual void close() {
+  void close() override {
     _file.close();
   }
 
-  virtual void clear() {
+  void clear() override {
     SD.remove(updateFileName);
   }
 
